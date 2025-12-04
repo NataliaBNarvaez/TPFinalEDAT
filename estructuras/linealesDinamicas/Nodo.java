@@ -1,21 +1,15 @@
-package TPFinalEDAT.estructuras.lineales.dinamicas;
+package TPFinalEDAT.estructuras.linealesDinamicas;
 
-/**
- *
- * @author Natalia Narvaez
- */
 public class Nodo {
 
     private Object elem;
     private Nodo enlace;
 
-    // Constructor
     public Nodo(Object elem, Nodo enlace) {
         this.elem = elem;
         this.enlace = enlace;
     }
 
-    // Modificadores
     public void setElem(Object elem) {
         this.elem = elem;
     }
@@ -24,7 +18,6 @@ public class Nodo {
         this.enlace = enlace;
     }
 
-    // Observadores
     public Object getElem() {
         return elem;
     }
@@ -32,5 +25,4 @@ public class Nodo {
     public Nodo getEnlace() {
         return enlace;
     }
-
 }

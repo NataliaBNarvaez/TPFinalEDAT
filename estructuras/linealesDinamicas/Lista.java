@@ -1,9 +1,5 @@
-package TPFinalEDAT.estructuras.lineales.dinamicas;
+package TPFinalEDAT.estructuras.linealesDinamicas;
 
-/**
- *
- * @author Natalia Narvaez
- */
 public class Lista {
 
     private Nodo cabecera;
@@ -194,5 +190,4 @@ public class Lista {
         }
         return exito;
     }
-
 }
