@@ -1,6 +1,6 @@
-package TPFinalEDAT.estructuras.conjuntistas;
+package conjuntistas;
 
-import TPFinalEDAT.estructuras.linealesDinamicas.Lista;
+import linealesDinamicas.Lista;
 
 //Arbol AVL
 public class Diccionario {

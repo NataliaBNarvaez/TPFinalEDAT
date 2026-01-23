@@ -1,4 +1,4 @@
-package TPFinalEDAT.trenesSA;
+package trenesSA;
 
 public class TrenesSA {
 

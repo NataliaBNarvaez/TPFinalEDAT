@@ -1,4 +1,4 @@
-package TPFinalEDAT.estructuras.conjuntistas;
+package conjuntistas;
 
 // Nodo AVL de Diccionario
 public class NodoDiccionario {

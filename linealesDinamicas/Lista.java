@@ -1,4 +1,4 @@
-package TPFinalEDAT.estructuras.linealesDinamicas;
+package linealesDinamicas;
 
 public class Lista {
 
