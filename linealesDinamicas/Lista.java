@@ -27,28 +27,30 @@ public class Lista {
                 Nodo nuevo = new Nodo(elem, aux.getEnlace());
                 aux.setEnlace(nuevo);
             }
-            this.longitud = this.longitud + 1;
+            this.longitud++;
         }
         return exito;
     }
 
     public boolean eliminar(int pos) {
         boolean exito = false;
-        if (pos > 0 && pos <= this.longitud()) {
-            // el enlace del nodo que apunta a la cabecera avanza al siguiente
-            if (pos == 1) {
-                this.cabecera = this.cabecera.getEnlace();
-            } else {
-                int i = 1;
-                Nodo aux = this.cabecera;
-                while (i < pos - 1) {
-                    aux = aux.getEnlace();
-                    i++;
+        if (!esVacia()) {
+            if (pos > 0 && pos <= this.longitud()) {
+                // el enlace del nodo que apunta a la cabecera avanza al siguiente
+                if (pos == 1) {
+                    this.cabecera = this.cabecera.getEnlace();
+                } else {
+                    int i = 1;
+                    Nodo aux = this.cabecera;
+                    while (i < pos - 1) {
+                        aux = aux.getEnlace();
+                        i++;
+                    }
+                    aux.setEnlace(aux.getEnlace().getEnlace());
                 }
-                aux.setEnlace(aux.getEnlace().getEnlace());
+                this.longitud--;
+                exito = true;
             }
-            this.longitud -= 1;
-            exito = true;
         }
         return exito;
     }

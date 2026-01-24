@@ -106,13 +106,16 @@ public class Diccionario {
         return exito;
     }
 
-    private Boolean eliminarAux(NodoDiccionario n, NodoDiccionario padre, Comparable buscado) {
-        boolean exito = false;
-        if (n != null) {
-
-        }
-        return exito;
-    }
+    /*
+     * private Boolean eliminarAux(NodoDiccionario n, NodoDiccionario padre,
+     * Comparable buscado) {
+     * boolean exito = false;
+     * if (n != null) {
+     * 
+     * }
+     * return exito;
+     * }
+     */
 
     public Lista listar() {
         Lista lis = new Lista();
@@ -192,23 +195,25 @@ public class Diccionario {
         return this.raiz == null;
     }
 
-    private NodoDiccionario obtenerNodo(NodoDiccionario n, Comparable buscado) {
-        // busca un elemento y devuelve el nodo. Si no se encuentra devuelve null
-        NodoDiccionario nodo = null;
-        if (n != null) {
-            if (buscado.compareTo(n.getClave()) == 0) {
-                // si lo encontro
-                nodo = n;
-            } else if (buscado.compareTo(n.getClave()) < 0) {
-                // si el elem es menor bajo a HI
-                nodo = obtenerNodo(n.getIzquierdo(), buscado);
-            } else {
-                // si el elem es mayor va a HD
-                nodo = obtenerNodo(n.getDerecho(), buscado);
-            }
-        }
-        return nodo;
-    }
+    /*
+     * private NodoDiccionario obtenerNodo(NodoDiccionario n, Comparable buscado) {
+     * // busca un elemento y devuelve el nodo. Si no se encuentra devuelve null
+     * NodoDiccionario nodo = null;
+     * if (n != null) {
+     * if (buscado.compareTo(n.getClave()) == 0) {
+     * // si lo encontro
+     * nodo = n;
+     * } else if (buscado.compareTo(n.getClave()) < 0) {
+     * // si el elem es menor bajo a HI
+     * nodo = obtenerNodo(n.getIzquierdo(), buscado);
+     * } else {
+     * // si el elem es mayor va a HD
+     * nodo = obtenerNodo(n.getDerecho(), buscado);
+     * }
+     * }
+     * return nodo;
+     * }
+     */
 
     public Diccionario clone() {
         Diccionario clon = new Diccionario();
