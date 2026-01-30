@@ -3,9 +3,9 @@ package grafo;
 public class NodoAdy {
     private NodoVertice vertice;
     private NodoAdy sigAdyacente;
-    private Object etiqueta;
+    private Double etiqueta;
 
-    public NodoAdy(NodoVertice v, NodoAdy sigA, Object e) {
+    public NodoAdy(NodoVertice v, NodoAdy sigA, Double e) {
         this.vertice = v;
         this.sigAdyacente = sigA;
         this.etiqueta = e;
@@ -31,7 +31,7 @@ public class NodoAdy {
         return this.etiqueta;
     }
 
-    public void setEtiqueta(Object et) {
+    public void setEtiqueta(Double et) {
         this.etiqueta = et;
     }
 }

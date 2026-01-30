@@ -17,6 +17,10 @@ public class NodoDiccionario {
         this.altura = 0;
     }
 
+    public void setClave(Comparable c) {
+        this.clave = c;
+    }
+
     public Comparable getClave() {
         return clave;
     }
@@ -53,7 +57,7 @@ public class NodoDiccionario {
         this.derecho = der;
     }
 
-    public Object getDato(Object d) {
+    public Object getDato() {
         return dato;
     }
 

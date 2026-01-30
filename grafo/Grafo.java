@@ -60,7 +60,7 @@ public class Grafo {
         return buscarVertice(vertice) != null;
     }
 
-    public boolean insertarArco(Object nUno, Object nDos, Object etiqueta) {
+    public boolean insertarArco(Object nUno, Object nDos, Double etiqueta) {
         boolean exito = false;
         NodoVertice nodoUno = buscarVertice(nUno);
         NodoVertice nodoDos = buscarVertice(nDos);
@@ -129,8 +129,52 @@ public class Grafo {
         return existe;
     }
 
-    public boolean vacio() {
-        return this.inicio == null;
+    public boolean existeCamino(Object origen, Object destino) {
+        boolean existe = false;
+        NodoVertice aux = this.inicio;
+        NodoVertice auxOrigen = null;
+        NodoVertice auxDestino = null;
+
+        while ((auxOrigen == null || auxDestino == null) && aux != null) {
+            if (aux.getElem().equals(origen))
+                auxOrigen = aux;
+            if (aux.getElem().equals(destino))
+                auxDestino = aux;
+            aux = aux.getSigVertice();
+        }
+
+        if (auxOrigen != null && auxDestino != null) {
+            Lista visitados = new Lista();
+            existe = existeCaminoAux(auxOrigen, destino, visitados);
+            System.out.println(visitados.toString());
+        }
+        return existe;
+    }
+
+    private boolean existeCaminoAux(NodoVertice n, Object destino, Lista visit) {
+        boolean existe = false;
+        if (n != null) {
+            if (n.getElem().equals(destino)) {
+                existe = true;
+            } else {
+                visit.insertar(n.getElem(), visit.longitud() + 1);
+                NodoAdy ady = n.getPrimerAdy();
+                while (!existe && ady != null) {
+                    if (visit.localizar(ady.getVertice().getElem()) < 0) {
+                        existe = existeCaminoAux(ady.getVertice(), destino, visit);
+                    }
+                    ady = ady.getSigAdyacente();
+                }
+            }
+        }
+        return existe;
+    }
+
+    // later --------------------------------
+    public Lista camioMasCorto() {
+        Lista resultado = new Lista();
+
+        return resultado;
     }
 
     public String toString() {
@@ -152,36 +196,7 @@ public class Grafo {
         return grafo;
     }
 
-    public boolean existeCamino(Object origen, Object destino) {
-        boolean existe = false;
-        NodoVertice aux = this.inicio;
-        NodoVertice auxOrigen = null;
-        NodoVertice auxDestino = null;
-
-        while ((auxOrigen == null || auxDestino == null) && aux != null) {
-            if (aux.getElem().equals(origen))
-                auxOrigen = aux;
-            if (aux.getElem().equals(destino))
-                auxDestino = aux;
-            aux = aux.getSigVertice();
-        }
-
-        if (auxOrigen != null && auxDestino != null) {
-            Lista visitados = new Lista();
-            existe = existeCaminoAux(auxOrigen, destino, visitados);
-        }
-        return existe;
-    }
-
-    private boolean existeCaminoAux(NodoVertice n, Object destino, Lista visit) {
-        boolean existe = false;
-
-        return existe;
-    }
-
-    public Lista camioMasCorto() {
-        Lista resultado = new Lista();
-
-        return resultado;
+    public boolean vacio() {
+        return this.inicio == null;
     }
 }
