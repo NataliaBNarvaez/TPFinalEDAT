@@ -1,4 +1,4 @@
-package linealesDinamicas;
+package estructuras.linealesDinamicas;
 
 public class Lista {
 
@@ -73,7 +73,7 @@ public class Lista {
 
     public int localizar(Object elem) {
         int pos = -1;
-        int i = 1;
+        int i = 0;
         boolean encontrado;
         Nodo aux = this.cabecera;
         if (!this.esVacia()) {
@@ -84,7 +84,7 @@ public class Lista {
             } while (!encontrado && i <= this.longitud());
 
             if (encontrado) {
-                pos = i - 1;
+                pos = i;
             }
         }
         return pos;

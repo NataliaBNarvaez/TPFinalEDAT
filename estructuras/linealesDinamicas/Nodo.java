@@ -1,4 +1,4 @@
-package linealesDinamicas;
+package estructuras.linealesDinamicas;
 
 public class Nodo {
 

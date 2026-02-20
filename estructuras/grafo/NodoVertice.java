@@ -1,4 +1,4 @@
-package grafo;
+package estructuras.grafo;
 
 public class NodoVertice {
     private Object elem;

@@ -1,8 +1,8 @@
-package conjuntistas;
+package estructuras.conjuntistas;
 
-import linealesDinamicas.Lista;
+import estructuras.linealesDinamicas.Lista;
 
-//Arbol AVL
+//TDA Diccionario implementado con Arbol AVL 
 public class Diccionario {
 
     private NodoDiccionario raiz;
@@ -13,6 +13,15 @@ public class Diccionario {
 
     public boolean pertenece(Comparable clave) {
         return obtenerNodo(this.raiz, clave) != null;
+    }
+
+    public Object buscar(Comparable clave) {
+        NodoDiccionario buscado = obtenerNodo(this.raiz, clave);
+        Object res = null;
+        if (buscado != null) {
+            res = buscado.getDato();
+        }
+        return res;
     }
 
     private NodoDiccionario obtenerNodo(NodoDiccionario n, Comparable buscado) {
@@ -270,6 +279,32 @@ public class Diccionario {
 
     public boolean esVacio() {
         return this.raiz == null;
+    }
+
+    // Metodo para busqueda de estaciones que comienzan con una subcadena (Punto 7)
+    public Lista obtenerInicianConSubcad(String cad) {
+        Lista result = new Lista();
+        if (!this.esVacio()) {
+            int longitSubCad = cad.length();
+            obtenerIniConSubcAux(this.raiz, cad, longitSubCad, result);
+        }
+        return result;
+    }
+
+    private void obtenerIniConSubcAux(NodoDiccionario n, String cad, int longitSubCad, Lista lista) {
+        if (n != null) {
+            String claveAcortada = ((String) n.getClave()).substring(0, longitSubCad);
+            System.out.println(claveAcortada);
+            if (claveAcortada.compareToIgnoreCase(cad) >= 0) {
+                obtenerIniConSubcAux(n.getIzquierdo(), cad, longitSubCad, lista);
+            }
+            if (claveAcortada.compareToIgnoreCase(cad) == 0) {
+                lista.insertar(n.getDato().toString(), lista.longitud() + 1);
+            }
+            if (claveAcortada.compareToIgnoreCase(cad) <= 0) {
+                obtenerIniConSubcAux(n.getDerecho(), cad, longitSubCad, lista);
+            }
+        }
     }
 
     public Lista listar() {

@@ -1,4 +1,4 @@
-package conjuntistas;
+package estructuras.conjuntistas;
 
 public class PruebaAVL {
     public static void main(String[] args) {

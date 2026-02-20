@@ -1,4 +1,4 @@
-package grafo;
+package estructuras.grafo;
 
 public class PruebaGrafo {
     public static void main(String[] args) {
