@@ -17,13 +17,14 @@ public class Estacion {
     private int cantVias;
     private int cantPlataformas;
 
-    public Estacion(String n, String c, int num, int cp, int v, int p) {
-        this.nombre = n;
-        this.calle = c;
+    public Estacion(String nom, String calle, int num, String ciu, int cp, int cVias, int cPlataformas) {
+        this.nombre = nom;
+        this.calle = calle;
         this.nro = num;
+        this.ciudad = ciu;
         this.codPost = cp;
-        this.cantVias = v;
-        this.cantPlataformas = p;
+        this.cantVias = cVias;
+        this.cantPlataformas = cPlataformas;
     }
 
     public String getNombre() {

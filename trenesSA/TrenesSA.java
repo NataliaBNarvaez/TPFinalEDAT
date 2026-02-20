@@ -12,6 +12,7 @@ public class TrenesSA {
     private static Diccionario trenes = new Diccionario();
     private static Grafo redRieles = new Grafo();
     private static HashMap<String, Lista> lineas = new HashMap<>();
+    private static ManejadorDeArchivos manejadorDeArchivos = new ManejadorDeArchivos();
 
     public static void main(String[] args) {
         int opcion = -1;
@@ -60,7 +61,6 @@ public class TrenesSA {
                 default:
                     break;
             }
-
         }
     }
 
@@ -79,11 +79,9 @@ public class TrenesSA {
         System.out.println("0. Salir.");
     }
 
-    /*
-     * 1. Carga inicial del sistema: ingresar al sistema un lote fijo de
-     * estaciones,trenes, líneas.
-     */
+    // Punto 1: Carga inicial del sistema
     public static void cargaInicial() {
+        manejadorDeArchivos.cargaIncicialDeDatos(estaciones, trenes, redRieles, lineas);
     }
 
     // Punto 2: ABM de trenes
@@ -143,12 +141,12 @@ public class TrenesSA {
                 Tren tren = new Tren(id, tp, cantPas, cantCarga, lin);
                 trenes.insertar(id, tren);
                 System.out.println("Se agrego exitosamente el tren con id: " + id);
-                // LOG
+                manejadorDeArchivos.escribir("Se agrego el tren con id: " + id);
             } else {
                 Tren tren = new Tren(id, tp, cantPas, cantCarga, "No asignado");
                 trenes.insertar(id, tren);
                 System.out.println("Se agrego exitosamente el tren con id: " + id);
-                // LOG
+                manejadorDeArchivos.escribir("Se agrego el tren con id: " + id);
             }
         }
     }
@@ -161,7 +159,7 @@ public class TrenesSA {
         if (trenes.pertenece(id)) {
             if (trenes.eliminar(id)) {
                 System.out.println("El tren con id: " + id + " fue eliminado correctamente.");
-                // LOG
+                manejadorDeArchivos.escribir("Se elimino el tren con id: " + id);
             } else {
                 System.out.println("No se pudo eliminar el tren con id: " + id);
             }
@@ -192,7 +190,7 @@ public class TrenesSA {
                     System.out.println("Ingrese el nuevo tipo de propulsion.");
                     String tProp = sc.nextLine();
                     tren.setTipoProp(tProp);
-                    // LOG
+                    manejadorDeArchivos.escribir("Se modifico el tipo de propulsion a " + tProp + " del tren " + id);
                     break;
 
                 case 2:
@@ -201,7 +199,8 @@ public class TrenesSA {
                     sc.nextLine();
                     if (cantPas >= 0) {
                         tren.setCantVagPasajeros(cantPas);
-                        // LOG
+                        manejadorDeArchivos.escribir(
+                                "Se modifico la cantidad de vagones para pasajeros a " + cantPas + " del tren " + id);
                     } else {
                         System.out.println("El numero ingresado no es valido.");
                     }
@@ -213,7 +212,8 @@ public class TrenesSA {
                     sc.nextLine();
                     if (cantCarg >= 0) {
                         tren.setCantVagCarga(cantCarg);
-                        // LOG
+                        manejadorDeArchivos.escribir(
+                                "Se modifico la cantidad de vagones para carga a " + cantCarg + " del tren " + id);
                     } else {
                         System.out.println("El numero ingresado no es valido.");
                     }
@@ -223,7 +223,7 @@ public class TrenesSA {
                     System.out.println("Ingrese la nueva linea.");
                     String linea = sc.nextLine();
                     tren.setLinea(linea);
-                    // LOG
+                    manejadorDeArchivos.escribir("Se modifico la linea a " + linea + " del tren " + id);
                     break;
 
                 default:
@@ -293,11 +293,11 @@ public class TrenesSA {
             cantP = sc.nextInt();
             sc.nextLine();
 
-            Estacion estacion = new Estacion(nombreEstacion, ci, nro, codP, cantV, cantP);
+            Estacion estacion = new Estacion(nombreEstacion, ca, nro, ci, codP, cantV, cantP);
             if (estaciones.insertar(nombreEstacion, estacion)) {
                 System.out.println("Se agrego exitosamente la estacion " + nombreEstacion);
                 redRieles.insertarVertice(estacion);
-                // LOG
+                manejadorDeArchivos.escribir("Se agrego la estacion " + nombreEstacion);
             } else {
                 System.out.println("No se pudo agregar la estacion " + nombreEstacion);
             }
@@ -317,7 +317,7 @@ public class TrenesSA {
                     }
                 });
                 System.out.println("La estacion " + nombreEstacion + " fue eliminada correctamente.");
-                // LOG
+                manejadorDeArchivos.escribir("Se elimino la estacion " + nombreEstacion);
             } else {
                 System.out.println("No se pudo eliminar la estacion " + nombreEstacion);
             }
@@ -349,7 +349,7 @@ public class TrenesSA {
                     System.out.println("Ingrese la nueva calle.");
                     String ca = sc.nextLine();
                     estacion.setCalle(ca);
-                    // LOG
+                    manejadorDeArchivos.escribir("Se modifico la calle a " + ca + " de la estacion " + nombreEstacion);
                     break;
 
                 case 2:
@@ -358,7 +358,8 @@ public class TrenesSA {
                     sc.nextLine();
                     if (nro >= 0) {
                         estacion.setNro(nro);
-                        // LOG
+                        manejadorDeArchivos.escribir(
+                                "Se modifico el numero de calle a " + nro + " de la estacion " + nombreEstacion);
                     } else {
                         System.out.println("El numero de calle ingresado no es valido.");
                     }
@@ -368,6 +369,7 @@ public class TrenesSA {
                     System.out.println("Ingrese la nueva ciudad.");
                     String ci = sc.nextLine();
                     estacion.setCiudad(ci);
+                    manejadorDeArchivos.escribir("Se modifico la ciudad a " + ci + " de la estacion " + nombreEstacion);
                     break;
 
                 case 4:
@@ -376,7 +378,8 @@ public class TrenesSA {
                     sc.nextLine();
                     if (codP >= 0) {
                         estacion.setCodPost(codP);
-                        // LOG
+                        manejadorDeArchivos.escribir(
+                                "Se modifico el codigo postal a " + codP + " de la estacion " + nombreEstacion);
                     } else {
                         System.out.println("El codigo postal ingresado no es valido.");
                     }
@@ -388,7 +391,8 @@ public class TrenesSA {
                     sc.nextLine();
                     if (cantV >= 0) {
                         estacion.setCantVias(cantV);
-                        // LOG
+                        manejadorDeArchivos.escribir(
+                                "Se modifico la cantidad de vias a " + cantV + " de la estacion " + nombreEstacion);
                     } else {
                         System.out.println("El numero de vias ingresado no es valido.");
                     }
@@ -400,7 +404,8 @@ public class TrenesSA {
                     sc.nextLine();
                     if (cantP >= 0) {
                         estacion.setCantPlataformas(cantP);
-                        // LOG
+                        manejadorDeArchivos.escribir("Se modifico la cantidad de plataformas a " + cantP
+                                + " de la estacion " + nombreEstacion);
                     } else {
                         System.out.println("El numero de plataformas ingresado no es valido.");
                     }
@@ -473,7 +478,7 @@ public class TrenesSA {
             if (!listaEstaciones.esVacia()) {
                 lineas.put(nombreLinea, listaEstaciones);
                 System.out.println("Se agrego exitosamente la linea " + nombreLinea);
-                // LOG
+                manejadorDeArchivos.escribir("Se agrego la linea " + nombreLinea);
             } else {
                 System.out.println("No se cargaron correctamente las estaciones.");
             }
@@ -487,7 +492,7 @@ public class TrenesSA {
         if (lineas.containsKey(nombreLinea)) {
             lineas.remove(nombreLinea);
             System.out.println("La linea " + nombreLinea + " fue eliminada correctamente.");
-            // LOG
+            manejadorDeArchivos.escribir("Se elimino la linea " + nombreLinea);
         } else {
             System.out.println(
                     "No es posible dar de baja a la linea puesto que el nombre ingresado no corresponde a una existente.");
@@ -514,7 +519,8 @@ public class TrenesSA {
                         listaEstaciones.insertar(nomEstacion, listaEstaciones.longitud() + 1);
                         System.out.println(
                                 "La estacion " + nomEstacion + " fue agregada exitosamente a la linea " + nomLinea);
-                        // LOG
+                        manejadorDeArchivos
+                                .escribir("Se agrego la estacion " + nomEstacion + " a la linea " + nomLinea);
                     } else {
                         System.out.println("La estacion ingresada no se encuentra registrada.");
                     }
@@ -527,10 +533,10 @@ public class TrenesSA {
                         int pos = listaEstaciones.localizar(nomLinea);
                         if (pos != -1) {
                             listaEstaciones.eliminar(pos);
-                            System.out.println(
-                                    "La estacion " + nomEstacion + " fue eliminada exitosamente de la linea "
-                                            + nomLinea);
-                            // LOG
+                            System.out.println("La estacion " + nomEstacion + " fue eliminada exitosamente de la linea "
+                                    + nomLinea);
+                            manejadorDeArchivos
+                                    .escribir("Se elimino la estacion " + nomEstacion + " de la linea " + nomLinea);
                         } else {
                             System.out.println(
                                     "La estacion " + nomEstacion
@@ -601,7 +607,8 @@ public class TrenesSA {
             if (redRieles.insertarArco(primEstacion, segEstacion, (double) km)) {
                 System.out.println("Se agrego exitosamente el riel de " + km + " km entre la estacion " + primEstacion
                         + " y la estacion " + segEstacion);
-                // LOG
+                manejadorDeArchivos.escribir("Se agrego  el riel de " + km + " km entre la estacion " + primEstacion
+                        + " y la estacion " + segEstacion);
             } else {
                 System.out.println("No se pudo cargar el nuevo riel.");
             }
@@ -624,7 +631,8 @@ public class TrenesSA {
             if (redRieles.eliminarArco(primEstacion, segEstacion)) {
                 System.out.println("Se elimino exitosamente el riel entre la estacion " + primEstacion
                         + " y la estacion " + segEstacion);
-                // LOG
+                manejadorDeArchivos.escribir(
+                        "Se elimino  el riel entre la estacion " + primEstacion + " y la estacion " + segEstacion);
             } else {
                 System.out.println("No se pudo eliminar el riel.");
             }
@@ -650,7 +658,8 @@ public class TrenesSA {
             if (redRieles.modificarArco(primEstacion, segEstacion, (double) nuevoKm)) {
                 System.out.println("Se modifico exitosamente el riel entre la estacion " + primEstacion
                         + " y la estacion " + segEstacion + " con nueva distancia: " + nuevoKm);
-                // LOG
+                manejadorDeArchivos.escribir("Se modifico el riel entre la estacion " + primEstacion
+                        + " y la estacion " + segEstacion + " con nueva distancia: " + nuevoKm);
             } else {
                 System.out.println("No se pudo modificar el riel puesto que no existe.");
             }
@@ -676,7 +685,7 @@ public class TrenesSA {
             switch (opcion) {
                 case 1:
                     tren.toString();
-                    // LOG
+                    manejadorDeArchivos.escribir("Se consulto informacion del tren " + idTren);
                     break;
 
                 case 2:
@@ -708,7 +717,7 @@ public class TrenesSA {
             }
             System.out.println("Ciudades que recorre el tren " + tren.getId() + " por la linea " + linea + ": ");
             System.out.println(result.toString());
-            // LOG
+            manejadorDeArchivos.escribir("Se consultaron las ciudades que visita el tren por la linea " + linea);
         } else {
             System.out.println("El tren no esta asignado a ninguna linea.");
         }
@@ -733,7 +742,7 @@ public class TrenesSA {
                             "(!) El nombre ingresado no corresponde a una estacion existente.");
                 } else {
                     estacion.toString();
-                    // LOG
+                    manejadorDeArchivos.escribir("Se consulto informacion de la estacion " + nomEstacion);
                 }
                 break;
 
@@ -762,7 +771,7 @@ public class TrenesSA {
             for (int i = 1; i <= longit; i++) {
                 System.out.println("- " + estacionesConSubcad.recuperar(i));
             }
-            // LOG
+            manejadorDeArchivos.escribir("Se consultaron las estaciones cuyo nombre comienzan con \"" + subcad + "\"");
         } else {
             System.out.println("No existen estaciones que comiencen con \"" + subcad + "\".");
         }
@@ -819,7 +828,8 @@ public class TrenesSA {
                 System.out
                         .println("El camino mas corto entre las estaciones " + estacionA + " y " + estacionB + " es:");
                 System.out.println(camino.toString());
-                // LOG
+                manejadorDeArchivos.escribir(
+                        "Se consulto el camino mas corto entre las estaciones " + estacionA + " y " + estacionB);
             }
         }
     }
@@ -843,7 +853,9 @@ public class TrenesSA {
                         .println("El camino con menor distancia de kilometros entre las estaciones " + estacionA + " y "
                                 + estacionB + " es:");
                 System.out.println(camino.toString());
-                // LOG
+                manejadorDeArchivos
+                        .escribir("Se consulto el camino con menor distancia de kilometros entre las estaciones "
+                                + estacionA + " y " + estacionB);
             }
         }
     }
@@ -878,7 +890,8 @@ public class TrenesSA {
                 for (int i = 0; i <= longit; i++) {
                     System.out.println("- " + camino.recuperar(i).toString());
                 }
-                // LOG
+                manejadorDeArchivos.escribir("Se consultaron todos los caminos entre las estaciones " + estacionA
+                        + " y " + estacionB + " sin pasar por " + estacionC);
             }
         }
     }
@@ -911,7 +924,8 @@ public class TrenesSA {
                         .println("Existe un camino entre las estaciones " + estacionA + " y "
                                 + estacionB + " con un limite de " + limiteKm + " kilometros.");
                 System.out.println(camino.toString());
-                // LOG
+                manejadorDeArchivos.escribir("Se consulto si existe un camino entre las estaciones " + estacionA + " y "
+                        + estacionB + " con un limite de " + limiteKm + " kilometros.");
             }
         }
     }
@@ -929,12 +943,12 @@ public class TrenesSA {
         switch (opcion) {
             case 1:
                 System.out.println(trenes.toString());
-                // LOG
+                manejadorDeArchivos.escribir("Se consulto la estructura de los trenes.");
                 break;
 
             case 2:
                 System.out.println(estaciones.toString());
-                // LOG
+                manejadorDeArchivos.escribir("Se consulto la estructura de las estaciones.");
                 break;
 
             case 3:
@@ -944,12 +958,12 @@ public class TrenesSA {
                     lineas.forEach((linea, estaciones) -> System.out
                             .println("Linea: " + linea + ", Pasa por estaciones: " + estaciones.toString()));
                 }
-                // LOG
+                manejadorDeArchivos.escribir("Se consulto la estructura de las lineas.");
                 break;
 
             case 4:
                 System.out.println(redRieles.toString());
-                // LOG
+                manejadorDeArchivos.escribir("Se consulto la estructura de la red de rieles.");
                 break;
 
             default:
