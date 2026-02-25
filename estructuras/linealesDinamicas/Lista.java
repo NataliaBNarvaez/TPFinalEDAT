@@ -72,19 +72,17 @@ public class Lista {
     }
 
     public int localizar(Object elem) {
-        int pos = -1;
-        int i = 0;
-        boolean encontrado;
-        Nodo aux = this.cabecera;
-        if (!this.esVacia()) {
-            do {
-                encontrado = (elem.equals(aux.getElem()));
-                aux = aux.getEnlace();
-                i++;
-            } while (!encontrado && i <= this.longitud());
-
-            if (encontrado) {
-                pos = i;
+        int pos = -1, i;
+        if (!esVacia()) {
+            i = 1;
+            Nodo aux = this.cabecera;
+            while (pos == -1 && aux != null) {
+                if (aux.getElem().equals(elem)) {
+                    pos = i;
+                } else {
+                    aux = aux.getEnlace();
+                    i++;
+                }
             }
         }
         return pos;

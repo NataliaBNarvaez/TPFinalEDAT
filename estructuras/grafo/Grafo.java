@@ -205,6 +205,9 @@ public class Grafo {
         NodoVertice aux = this.inicio;
         while (aux != null) {
             NodoAdy adyAux = aux.getPrimerAdy();
+            if (adyAux == null) {
+                grafo += aux.getElem().toString();
+            }
             while (adyAux != null) {
                 grafo += aux.getElem().toString() + " --" + adyAux.getEtiqueta().toString() + "--> "
                         + adyAux.getVertice().getElem().toString();
@@ -347,7 +350,7 @@ public class Grafo {
         NodoVertice nDestino = buscarVertice(destino);
 
         if (nOrigen != nDestino && nOrigen != null && nDestino != null) {
-            resultado = caminoLimiteKmAux(nOrigen, destino, kmActuales, 0, limiteKm, resultado, visitados);
+            resultado = caminoLimiteKmAux(nOrigen, destino, kmActuales, 0.0, limiteKm, resultado, visitados);
         }
         return resultado;
     }
@@ -361,7 +364,7 @@ public class Grafo {
             resultado = visitados.clone();
         } else {
             NodoAdy nAdy = n.getPrimerAdy();
-            while (nAdy != null && !resultado.esVacia()) {
+            while (nAdy != null && resultado.esVacia()) {
                 NodoVertice nVert = nAdy.getVertice();
                 double pesoEtiqueta = (double) nAdy.getEtiqueta();
                 if (kmActuales[0] + pesoEtiqueta < limiteKm && visitados.localizar(nVert.getElem()) == -1) {

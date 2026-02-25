@@ -80,7 +80,8 @@ public class Estacion {
     }
 
     public String toString() {
-        return "ESTACION " + nombre + " - Domicilio: " + calle + nro + " Ciudad: " + ciudad + " Cod. postal: " + codPost
+        return "ESTACION " + nombre + " - Domicilio: " + calle + " " + nro + " Ciudad: " + ciudad + " Cod. postal: "
+                + codPost
                 + " - Cant. de vias: " + cantVias + " - Cant. de plataformas: " + cantPlataformas;
     }
 }

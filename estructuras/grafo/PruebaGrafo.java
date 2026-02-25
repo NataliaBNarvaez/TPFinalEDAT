@@ -11,6 +11,7 @@ public class PruebaGrafo {
             cont++;
         }
         System.out.println(g.vacio());
+        System.out.println(g.toString());
 
         g.insertarArco(1, 2, 3.0);
         g.insertarArco(2, 4, 6.0);

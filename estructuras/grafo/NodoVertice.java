@@ -15,7 +15,7 @@ public class NodoVertice {
     }
 
     public void setElem(Object e) {
-        this.elem = e; // ??
+        this.elem = e;
     }
 
     public NodoVertice getSigVertice() {

@@ -88,7 +88,7 @@ public class TrenesSA {
     public static void abmTrenes() {
         int opcion = -1;
         while (opcion != 0) {
-            System.out.println("-- ABM TRENES --");
+            System.out.println("        -- ABM TRENES --");
             System.out.println("1. Dar de alta un tren.");
             System.out.println("2. Dar de baja un tren.");
             System.out.println("3. Modificar un tren.");
@@ -239,7 +239,7 @@ public class TrenesSA {
     public static void abmEstaciones() {
         int opcion = -1;
         while (opcion != 0) {
-            System.out.println("-- ABM ESTACIONES --");
+            System.out.println("        -- ABM ESTACIONES --");
             System.out.println("1. Dar de alta una estacion.");
             System.out.println("2. Dar de baja una estacion.");
             System.out.println("3. Modificar una estacion.");
@@ -296,7 +296,7 @@ public class TrenesSA {
             Estacion estacion = new Estacion(nombreEstacion, ca, nro, ci, codP, cantV, cantP);
             if (estaciones.insertar(nombreEstacion, estacion)) {
                 System.out.println("Se agrego exitosamente la estacion " + nombreEstacion);
-                redRieles.insertarVertice(estacion);
+                redRieles.insertarVertice(nombreEstacion);
                 manejadorDeArchivos.escribir("Se agrego la estacion " + nombreEstacion);
             } else {
                 System.out.println("No se pudo agregar la estacion " + nombreEstacion);
@@ -424,7 +424,7 @@ public class TrenesSA {
     public static void abmLineas() {
         int opcion = -1;
         while (opcion != 0) {
-            System.out.println("-- ABM LINEAS --");
+            System.out.println("        -- ABM LINEAS --");
             System.out.println("1. Dar de alta una linea.");
             System.out.println("2. Dar de baja una linea.");
             System.out.println("3. Modificar una linea.");
@@ -466,11 +466,11 @@ public class TrenesSA {
             while (!estacion.equalsIgnoreCase("f")) {
                 if (estaciones.pertenece(estacion)) {
                     listaEstaciones.insertar(estacion, listaEstaciones.longitud() + 1);
-                    System.out.println("Ingrese la siguiente estacion o F para terminar");
+                    System.out.println("Ingrese la siguiente estacion o F para terminar.");
                     estacion = sc.nextLine();
                 } else {
                     System.out.println(
-                            "La estacion ingresada no se encuentra registrada, intente nuevamente o F para terminar");
+                            "La estacion ingresada no se encuentra registrada, intente nuevamente o F para terminar.");
                     estacion = sc.nextLine();
                 }
             }
@@ -480,7 +480,7 @@ public class TrenesSA {
                 System.out.println("Se agrego exitosamente la linea " + nombreLinea);
                 manejadorDeArchivos.escribir("Se agrego la linea " + nombreLinea);
             } else {
-                System.out.println("No se cargaron correctamente las estaciones.");
+                System.out.println("No se cargaron correctamente las estaciones. No es posible dar de alta la linea.");
             }
         }
     }
@@ -530,7 +530,7 @@ public class TrenesSA {
                     System.out.println("Ingrese el nombre de la estacion a eliminar.");
                     nomEstacion = sc.nextLine();
                     if (estaciones.pertenece(nomEstacion)) {
-                        int pos = listaEstaciones.localizar(nomLinea);
+                        int pos = listaEstaciones.localizar(nomEstacion);
                         if (pos != -1) {
                             listaEstaciones.eliminar(pos);
                             System.out.println("La estacion " + nomEstacion + " fue eliminada exitosamente de la linea "
@@ -540,7 +540,7 @@ public class TrenesSA {
                         } else {
                             System.out.println(
                                     "La estacion " + nomEstacion
-                                            + " no pudo ser eliminada puesto que no pertenece a la linea."
+                                            + " no pudo ser eliminada puesto que no pertenece a la linea "
                                             + nomLinea);
                         }
                     } else {
@@ -561,7 +561,7 @@ public class TrenesSA {
     public static void abmRieles() {
         int opcion = -1;
         while (opcion != 0) {
-            System.out.println("-- ABM RED DE RIELES --");
+            System.out.println("        -- ABM RED DE RIELES --");
             System.out.println("1. Dar de alta un riel.");
             System.out.println("2. Dar de baja un riel.");
             System.out.println("3. Modificar un riel.");
@@ -594,7 +594,7 @@ public class TrenesSA {
         System.out.println("Ingrese el nombre de la segunda estacion.");
         String segEstacion = sc.nextLine();
         System.out.println("Ingrese la distancia en kilometros entre estaciones.");
-        int km = sc.nextInt();
+        double km = sc.nextDouble();
         sc.nextLine();
 
         if (!estaciones.pertenece(primEstacion)) {
@@ -668,7 +668,7 @@ public class TrenesSA {
 
     // Punto 6: Consultas sobre trenes
     public static void consultasTrenes() {
-        System.out.println("-- Consultas Trenes --");
+        System.out.println("        -- Consultas Trenes --");
         System.out.println("1. Mostrar toda la informacion relacionada a un tren.");
         System.out.println("2. Verificar si un tren esta destinado a alguna linea y ver que ciudades visitaria.");
         System.out.println("0. Volver al menu principal.");
@@ -684,7 +684,7 @@ public class TrenesSA {
         } else {
             switch (opcion) {
                 case 1:
-                    tren.toString();
+                    System.out.println(tren.toString());
                     manejadorDeArchivos.escribir("Se consulto informacion del tren " + idTren);
                     break;
 
@@ -725,7 +725,7 @@ public class TrenesSA {
 
     // Punto 7: Consultas sobre estaciones
     public static void consultasEstaciones() {
-        System.out.println("-- Consultas Estaciones --");
+        System.out.println("        -- Consultas Estaciones --");
         System.out.println("1. Mostrar toda la informacion relacionada a una estacion.");
         System.out
                 .println("2. Dada una cadena, obtener todas las estaciones cuyo nombre comienzan con dicha subcadena.");
@@ -741,7 +741,7 @@ public class TrenesSA {
                     System.out.println(
                             "(!) El nombre ingresado no corresponde a una estacion existente.");
                 } else {
-                    estacion.toString();
+                    System.out.println(estacion.toString());
                     manejadorDeArchivos.escribir("Se consulto informacion de la estacion " + nomEstacion);
                 }
                 break;
@@ -779,7 +779,7 @@ public class TrenesSA {
 
     // Punto 8: Consultas sobre viajes
     public static void consultasViajes() {
-        System.out.println("-- Consultas Viajes --");
+        System.out.println("        -- Consultas Viajes --");
         System.out.println("Dadas dos estaciones: ");
         System.out.println("1. Obtener el camino que pase por menos estaciones.");
         System.out.println("2. Obtener el camino que recorra la menor cantidad de kilometros.");
@@ -880,14 +880,14 @@ public class TrenesSA {
         } else {
             Lista camino = redRieles.todosCaminosSinEstacion(estacionA, estacionB, estacionC);
             if (camino.esVacia()) {
-                System.out.println("No existe un camino entre las estaciones" + estacionA + " y " + estacionB
+                System.out.println("No existe un camino entre las estaciones " + estacionA + " y " + estacionB
                         + " sin que pase por " + estacionC);
             } else {
                 System.out
                         .println("Los caminos entre las estaciones " + estacionA + " y "
                                 + estacionB + " sin pasar por " + estacionC + " son:");
                 int longit = camino.longitud();
-                for (int i = 0; i <= longit; i++) {
+                for (int i = 1; i <= longit; i++) {
                     System.out.println("- " + camino.recuperar(i).toString());
                 }
                 manejadorDeArchivos.escribir("Se consultaron todos los caminos entre las estaciones " + estacionA
@@ -917,7 +917,7 @@ public class TrenesSA {
         } else {
             Lista camino = redRieles.caminoLimiteKm(estacionA, estacionB, limiteKm);
             if (camino.esVacia()) {
-                System.out.println("No existe un camino entre las estaciones" + estacionA + " y " + estacionB
+                System.out.println("No existe un camino entre las estaciones " + estacionA + " y " + estacionB
                         + " sin superar los " + limiteKm + " kilometros.");
             } else {
                 System.out
@@ -932,42 +932,45 @@ public class TrenesSA {
 
     // Punto 9: Mostrar estructura del sistema
     public static void mostrarSistema() {
-        System.out.println("-- Muestra del Sistema --");
-        System.out.println("1. Consultar estructura de Trenes.");
-        System.out.println("2. Consultar estructura de Estaciones.");
-        System.out.println("3. Consultar estructura de Lineas.");
-        System.out.println("4. Consultar estructura de Red de Rieles.");
-        System.out.println("0. Volver al menu principal.");
-        int opcion = sc.nextInt();
-        sc.nextLine();
-        switch (opcion) {
-            case 1:
-                System.out.println(trenes.toString());
-                manejadorDeArchivos.escribir("Se consulto la estructura de los trenes.");
-                break;
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("        -- Muestra del Sistema --");
+            System.out.println("1. Consultar estructura de Trenes.");
+            System.out.println("2. Consultar estructura de Estaciones.");
+            System.out.println("3. Consultar estructura de Lineas.");
+            System.out.println("4. Consultar estructura de Red de Rieles.");
+            System.out.println("0. Volver al menu principal.");
+            opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    System.out.println(trenes.toString());
+                    manejadorDeArchivos.escribir("Se consulto la estructura de los trenes.");
+                    break;
 
-            case 2:
-                System.out.println(estaciones.toString());
-                manejadorDeArchivos.escribir("Se consulto la estructura de las estaciones.");
-                break;
+                case 2:
+                    System.out.println(estaciones.toString());
+                    manejadorDeArchivos.escribir("Se consulto la estructura de las estaciones.");
+                    break;
 
-            case 3:
-                if (lineas.isEmpty()) {
-                    System.out.println("No hay informacion disponible sobre las lineas.");
-                } else {
-                    lineas.forEach((linea, estaciones) -> System.out
-                            .println("Linea: " + linea + ", Pasa por estaciones: " + estaciones.toString()));
-                }
-                manejadorDeArchivos.escribir("Se consulto la estructura de las lineas.");
-                break;
+                case 3:
+                    if (lineas.isEmpty()) {
+                        System.out.println("No hay informacion disponible sobre las lineas.");
+                    } else {
+                        lineas.forEach((linea, estaciones) -> System.out
+                                .println("Linea: " + linea + ", Pasa por estaciones: " + estaciones.toString()));
+                    }
+                    manejadorDeArchivos.escribir("Se consulto la estructura de las lineas.");
+                    break;
 
-            case 4:
-                System.out.println(redRieles.toString());
-                manejadorDeArchivos.escribir("Se consulto la estructura de la red de rieles.");
-                break;
+                case 4:
+                    System.out.println(redRieles.toString());
+                    manejadorDeArchivos.escribir("Se consulto la estructura de la red de rieles.");
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     }
 }
