@@ -79,12 +79,12 @@ public class TrenesSA {
         System.out.println("0. Salir.");
     }
 
-    // Punto 1: Carga inicial del sistema
+    // Punto 1: Carga inicial del sistema -----------------------------
     public static void cargaInicial() {
         manejadorDeArchivos.cargaIncicialDeDatos(estaciones, trenes, redRieles, lineas);
     }
 
-    // Punto 2: ABM de trenes
+    // Punto 2: ABM de trenes -----------------------------
     public static void abmTrenes() {
         int opcion = -1;
         while (opcion != 0) {
@@ -235,7 +235,7 @@ public class TrenesSA {
         }
     }
 
-    // Punto 3: ABM de estaciones
+    // Punto 3: ABM de estaciones -----------------------------
     public static void abmEstaciones() {
         int opcion = -1;
         while (opcion != 0) {
@@ -420,7 +420,7 @@ public class TrenesSA {
         }
     }
 
-    // Punto 4: ABM de líneas
+    // Punto 4: ABM de líneas -----------------------------
     public static void abmLineas() {
         int opcion = -1;
         while (opcion != 0) {
@@ -557,7 +557,7 @@ public class TrenesSA {
         }
     }
 
-    // Punto 5: ABM de la red de rieles
+    // Punto 5: ABM de la red de rieles -----------------------------
     public static void abmRieles() {
         int opcion = -1;
         while (opcion != 0) {
@@ -666,7 +666,7 @@ public class TrenesSA {
         }
     }
 
-    // Punto 6: Consultas sobre trenes
+    // Punto 6: Consultas sobre trenes -----------------------------
     public static void consultasTrenes() {
         System.out.println("        -- Consultas Trenes --");
         System.out.println("1. Mostrar toda la informacion relacionada a un tren.");
@@ -723,7 +723,7 @@ public class TrenesSA {
         }
     }
 
-    // Punto 7: Consultas sobre estaciones
+    // Punto 7: Consultas sobre estaciones -----------------------------
     public static void consultasEstaciones() {
         System.out.println("        -- Consultas Estaciones --");
         System.out.println("1. Mostrar toda la informacion relacionada a una estacion.");
@@ -777,7 +777,7 @@ public class TrenesSA {
         }
     }
 
-    // Punto 8: Consultas sobre viajes
+    // Punto 8: Consultas sobre viajes -----------------------------
     public static void consultasViajes() {
         System.out.println("        -- Consultas Viajes --");
         System.out.println("Dadas dos estaciones: ");
@@ -930,7 +930,7 @@ public class TrenesSA {
         }
     }
 
-    // Punto 9: Mostrar estructura del sistema
+    // Punto 9: Mostrar estructura del sistema -----------------------------
     public static void mostrarSistema() {
         int opcion = -1;
         while (opcion != 0) {

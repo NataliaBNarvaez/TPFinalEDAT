@@ -241,7 +241,6 @@ public class Diccionario {
         }
         aux.recalcularAltura();
         balancear(aux, padreAux);
-        // aux.recalcularAltura():
     }
 
     public String toString() {
@@ -307,6 +306,7 @@ public class Diccionario {
         }
     }
 
+    // Otros metodos de Arbol AVL
     public Lista listar() {
         Lista lis = new Lista();
         if (!this.esVacio()) {

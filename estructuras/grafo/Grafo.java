@@ -51,7 +51,7 @@ public class Grafo {
         NodoVertice borrarleArco;
         while (adyacentes != null) {
             borrarleArco = adyacentes.getVertice();
-            elimArcoAux(borrarleArco, aux);
+            elimArcoAux(borrarleArco, aux.getElem());
             adyacentes = adyacentes.getSigAdyacente();
         }
     }
@@ -64,7 +64,7 @@ public class Grafo {
         boolean exito = false;
         NodoVertice nodoUno = buscarVertice(nUno);
         NodoVertice nodoDos = buscarVertice(nDos);
-        if (nodoUno != null && nodoDos != null) {
+        if (nodoUno != null && nodoDos != null && !existeArco(nUno, nDos)) {
             nodoUno.setPrimerAdy(new NodoAdy(nodoDos, nodoUno.getPrimerAdy(), etiqueta));
             nodoDos.setPrimerAdy(new NodoAdy(nodoUno, nodoDos.getPrimerAdy(), etiqueta));
             exito = true;
@@ -77,29 +77,31 @@ public class Grafo {
         NodoVertice nodoUno = buscarVertice(nUno);
         NodoVertice nodoDos = buscarVertice(nDos);
         if (nodoUno != null && nodoDos != null) {
-            if (elimArcoAux(nodoUno, nodoDos)) {
-                exito = elimArcoAux(nodoDos, nodoUno);
+            if (elimArcoAux(nodoUno, nDos)) {
+                exito = elimArcoAux(nodoDos, nUno);
             }
         }
         return exito;
     }
 
-    private boolean elimArcoAux(NodoVertice nUno, NodoVertice nDos) {
+    private boolean elimArcoAux(NodoVertice nUno, Object nDos) {
         boolean eliminado = false;
         NodoAdy aux = nUno.getPrimerAdy();
-        NodoAdy sigAux = aux.getSigAdyacente();
+        if (aux != null) {
+            NodoAdy sigAux = aux.getSigAdyacente();
 
-        if (aux.getVertice().getElem().equals(nDos.getElem())) {
-            nUno.setPrimerAdy(sigAux);
-            eliminado = true;
-        } else {
-            while (sigAux != null && !eliminado) {
-                if (sigAux.getVertice().getElem().equals(nDos.getElem())) {
-                    aux.setSigAdyacente(sigAux.getSigAdyacente());
-                    eliminado = true;
-                } else {
-                    aux = sigAux;
-                    sigAux = sigAux.getSigAdyacente();
+            if (aux.getVertice().getElem().equals(nDos)) {
+                nUno.setPrimerAdy(sigAux);
+                eliminado = true;
+            } else {
+                while (sigAux != null && !eliminado) {
+                    if (sigAux.getVertice().getElem().equals(nDos)) {
+                        aux.setSigAdyacente(sigAux.getSigAdyacente());
+                        eliminado = true;
+                    } else {
+                        aux = sigAux;
+                        sigAux = sigAux.getSigAdyacente();
+                    }
                 }
             }
         }
@@ -248,7 +250,7 @@ public class Grafo {
             NodoAdy nAdy = n.getPrimerAdy();
             while (nAdy != null) {
                 NodoVertice nVert = nAdy.getVertice();
-                if ((visitados.longitud() - 1 < resultado.longitud() || resultado.esVacia())
+                if ((visitados.longitud() + 1 < resultado.longitud() || resultado.esVacia())
                         && visitados.localizar(nVert.getElem()) == -1) {
                     resultado = caminoMasCortoAux(nVert, destino, resultado, visitados);
                 }
